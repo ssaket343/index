@@ -144,6 +144,12 @@
 
 
         ];
+        document.addEventListener("DOMContentLoaded", function () {
+            var param1Value = getParameterByName("merchantId");
+            if (param1Value !== null) {
+                alert("Value of param1: " + param1Value);
+            }
+        });
         const selectOptions=[
             {key:"op", value:"billing"},
         {key:"op",value:"shipping"
