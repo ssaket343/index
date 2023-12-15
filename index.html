@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            padding: 5 px;
+            text-align: center;
+        }
+        #table {
+            width: 10%;
+            border-spacing: 0.5em;
+        }
+
+        #table td{
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        #mytable {
+            width: 10%;
+            border-spacing: 0.5em;
+            border-collapse: collapse;
+        }
+
+        #mytable td{
+            border:none;
+            padding:0;
+            text-align: center;
+        }
+        .cell.zoomed {
+            transform: scale(1.5);
+            z-index: 2;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .cell {
+            width: calc(100% / 7);
+           
+            text-align: center;
+            cursor: pointer;
+            transform-origin: center center;
+            transform: scale(1);
+            transition: transform 0.2 ease-in-out;
+        }
+
+
+    </style>
+</head>
+<body>
+    <table id="mytable">
+        <tr>
+            <td>
+
+
+
+    <table id="table">
+       
+       
+
+        <tr>
+            <td><select  id="cell1" class="cell" value="addresstype">
+                <option> Select addresstype</option>
+                <option>Shipping </option>
+                <option>Billing</option>
+
+            </select></td>
+            <td><input type="text" id="cell2" class="cell"  value="addressline1"></td>
+            
+            <td><input type="text" id="cell3" class="cell" value="addressline2"></td>
+            <td><input type="text" id="cell4" class="cell" value="location"></td>
+            <td><input type="text" id="cell5" class="cell" value="email"></td>
+            <td><input type="text" id="cell6" class="cell" value="street"></td>
+            <td><input type="text" id="cell7" class="cell" value="country"></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="cell8" class="cell" value="Area"></td>
+            <td><input type="text" id="cell9" class="cell" value="state"></td>
+            <td><input type="text" id="cell10" class="cell" value="juris"></td>
+            <td><input type="text" id="cell11" class="cell" value="District"></td>
+            <td><input type="text" id="cell12" class="cell" value="city"></td>
+            <td><input type="text" id="cell13" class="cell" value="Isdefault"></td>
+            <td><input type="text" id="cell14" class="cell" value="status"></td>
+        </tr>
+        <button onclick="addRow()" id="pa">Add Row</button>
+
+    </table>
+</tr>
+    </td>
+    </table>
+
+    <div class="container">
+        <div class="cell" onclick ="zoom(this)">cell1</div>
+        <div class="cell" onclick ="zoom(this)">cell2</div>
+        <div class="cell" onclick ="zoom(this)">cell3</div>
+    </div>
+    <script>
+        function zoom(cell){
+            if(cell.classList.contains("zoomed")){
+                cell.classList.remove("zoomed");
+            }
+            else{
+                const cells= document.querySelectorAll(".cell");
+                cells.forEach((c) => c.classList.remove("zoomed"));
+                cell.classList.add("zoomed");
+            }
+
+        }
+
+        function addRow(){
+        const numrows=2;
+        const numcols=7;
+
+        var table=document.getElementById("table");
+
+        const headerNow=document.createElement("tr");
+
+        const placeholder = [
+        "addresstype",
+        "addressline1",
+        "addressline2",
+        "location",
+        "email",
+        "street",
+        "country",
+        "Area",
+        "state",
+        "juris",
+        "Distict",
+        "city",
+        "pincode",
+        "isDefault",
+
+
+
+
+
+
+        ];
+        const selectOptions=[
+            {key:"op", value:"billing"},
+        {key:"op",value:"shipping"
+        }];
+
+        for(let row = 1; row <= numrows; row++){
+            const dataRow= document.createElement("tr");
+        for (let col=1 ; col <=numcols; col++){
+            const td=document.createElement("td");
+            if(row === 1 && col === 0){
+                const select =document.createElement("select");
+                select.id="cell" + ((row-1) * numcols + col);
+                for (const optionText of selectOptions){
+                    const option= document.createElement("option");
+                    option.value=optionText.key;
+                    option.textContent=optionText.value;
+                    console.log(option);
+                    select.appendChild(option);
+                }
+                td.appendChild(select);
+            }
+            else{
+            var input=document.createElement("input");
+            input.type='text';
+            input.id="cell" +((row-1) * numcols + col);
+            input.placeholder=placeholder[((row-1) * numcols + col)];
+            td.appendChild(input);
+            dataRow.appendChild(td);
+            }
+
+        }
+        table.appendChild(dataRow);
+
+    }
+}
+    </script>
+</body>
+</html>
