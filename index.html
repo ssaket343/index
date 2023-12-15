@@ -89,7 +89,7 @@
             <td><input type="text" id="cell13" class="cell" value="Isdefault"></td>
             <td><input type="text" id="cell14" class="cell" value="status"></td>
         </tr>
-        <button onclick="fetch()" id="pa">Add Row</button>
+        <button onclick="addRow()" id="pa">Add Row</button>
         <br><br>
         <button onclick="fetch()" id="pa">Fetch</button>
 
@@ -146,21 +146,7 @@
 
 
         ];
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
-        function fetch() {
-            var param1Value = getParameterByName("merchantId");
-            if (param1Value !== null) {
-                alert("Value of param1: " + param1Value);
-            }
-        }
+       
         const selectOptions=[
             {key:"op", value:"billing"},
         {key:"op",value:"shipping"
@@ -196,6 +182,22 @@
 
     }
 }
+
+function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        function fetch() {
+            var param1Value = getParameterByName("merchantId");
+            if (param1Value !== null) {
+                alert("Value of param1: " + param1Value);
+            }
+        }
     </script>
 </body>
 </html>
