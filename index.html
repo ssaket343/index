@@ -90,6 +90,7 @@
             <td><input type="text" id="cell14" class="cell" value="status"></td>
         </tr>
         <button onclick="addRow()" id="pa">Add Row</button>
+        <button onclick="fetch()" id="pa">Fetch</button>
 
     </table>
 </tr>
@@ -153,12 +154,12 @@
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
-        document.addEventListener("DOMContentLoaded", function () {
+        function fetch() {
             var param1Value = getParameterByName("merchantId");
             if (param1Value !== null) {
                 alert("Value of param1: " + param1Value);
             }
-        });
+        }
         const selectOptions=[
             {key:"op", value:"billing"},
         {key:"op",value:"shipping"
